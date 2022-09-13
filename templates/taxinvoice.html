@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=0.4">
+    <title>Tax Invoice</title>
+    <style>
+        body{
+            margin: auto;
+        }
+        .blank_row{
+            height: 100px !important;
+            background-color: #FFFFFF;   
+        }
+        table{
+            width: 100%;
+        }
+        .bordor,td{
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        .nobordor tr td {
+        border:none;
+        }
+        table td{
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+        .bordor1 td{
+            border-bottom:none;
+            border-top:none;
+            text-align: center;
+        }
+        .header{
+            line-height: 5px;
+            text-align: center;
+        }
+        .center{
+            text-align: center;
+        }
+        .wid{
+            width: 75%;
+        }
+
+        @media (max-width: 480px) {
+        .header{
+            line-height: 8px;
+        }
+        #addr{
+        line-height:20px;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+    document.getElementById("download")
+        .addEventListener("click", () =>myfunc("{{pdfname}}"));
+        function myfunc() {
+            const invoice = this.document.getElementById("content2");
+            console.log(invoice);
+            console.log(window);
+            var opt = {
+                margin: [0,-20,0,-20],
+                filename: "{{pdfname}}",
+                image: { type: 'jpeg', quality: 1 },
+                html2canvas: { scale: 1.5 , logging:true , dpi:192 , letterRendering:true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+            html2pdf().from(invoice).set(opt).save();
+        }
+}
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+</head>
+
+<body class="wid" id="content2"> 
+    <h3 class="center">TAX INVOICE</h3>
+    <table class="bordor">
+        <tr>
+            <td colspan="2" class="header">
+                <p><b>||पार्श्वनाथाय नमः||</b></p>
+                <h2><b>SHILP CREATION</b></h2>
+                <p id="addr">302, FLOOR-3RD FLOOR, DHARA APPARTMENT, ASHA NAGAR, NAVSARI, GUJARAT, 396445</p>
+                <p><b> GSTIN : 24AQDPS8411N1ZH </b></p>
+                <p>PHONE : 9099001269 / 9427128903</p>
+                <p>EMAIL : h_rshah@yahoo.co.in</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="75%">
+                <p>BUYER DETAILS <br>
+                <b> PARTY NAME : {{header[5][1]}} </b><br>
+                ADDRESS : {{header[6][1]}} <br>
+                GSTIN : {{header[8][1]}} <br>
+            </td>
+            <td rowspan="2">
+                <p><b> INVOICE NO : {{header[0][1]}} </b></p>
+                <p>DATE : {{date1}}</p>
+                <p>TRANSPORT : {{parcel}}</p>
+            </td>
+        </tr>
+        <tr>
+            <td>SHIP TO : {{header[7][1]}}</td>
+        </tr>
+    </table>
+    <table class="bordor bordor1">
+        <tr>
+            <td><b>Sr.</b></td>
+            <td><b>Description of Goods</b></td>
+            <td><b>HSN/SAC</b></td>
+            <!-- <td><b>Fold</b></td> -->
+            <td><b>Finish Mtr.</b></td>
+            <td><b>Net Mtr.</b></td>
+            <td><b>Rate</b></td>
+            <td><b>Amount</b></td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>{{goods[0][1]}}</td>
+            <td>5407</td>
+            <!-- <td>{{header[-1][1]}}</td> -->
+            <td>{{goods[1][1]}}</td>
+            <td>{{'%0.2f'| format(net_mtr|float)}}</td>
+            <td>{{goods[2][1]}}</td>
+            <td>{{'%0.2f'| format(total|float)}}</td>
+        </tr>
+        <tr class="blank_row">
+            <td></td>
+            <td></td>
+            <td></td>
+            <!-- <td></td> -->
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <!-- <td></td> -->
+            <td></td>
+            <td></td>
+            <td><b>Taxable Amount</b></td>
+            <td><b>{{'%0.2f'| format(total|float)}}</b></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <!-- <td></td> -->
+            <td></td>
+            <td></td>
+            <td><i><b>IGST(5%)</b></i></td>
+            <td><b>{{'%0.2f'| format(igst|float)}}</b></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <!-- <td></td> -->
+            <td></td>
+            <td></td>
+            <td>ROUND OFF</td>
+            <td>{{'%0.2f'| format(roff|float)}}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <!-- <td></td> -->
+            <td></td>
+            <td></td>
+            <td><b>TOTAL</b></td>
+            <td><b>{{finaltotal}}</b></td>
+        </tr>
+    </table>
+    <table class="bordor">
+        <tr>
+            <td colspan="2">Tax Amount (in words) : <b>{{textfinal}}</td>
+        </tr>
+        <tr>
+            <td width=50%>
+                <b><u>Declaration</u></b><br>
+                <p>We declare that this invoice shows the actual price of
+                    the goods described and that all particulars are true
+                    and correct.
+                </p>
+            </td>
+            <td>
+                <table class="nobordor">
+                    <tr>
+                        <td colspan="2">Company’s Bank Details</td>
+                    </tr>
+                    <tr>
+                        <td>A/c Holder’s Name</td>
+                        <td><b>SHILP CREATION</b></td>
+                    </tr>
+                    <tr>
+                        <td>Bank Name</td>
+                        <td><b>HDFC BANK A/C 83130</b></td>
+                    </tr>
+                    <tr>
+                        <td>A/c No.</td>
+                        <td><b>50200054783130</b></td>
+                    </tr>
+                    <tr>
+                        <td>Branch & IFS Code</td>
+                        <td><b>NANDINI COMPLEX & HDFC0000135</b></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td class="vtop">Customer’s Seal and Signature</td>
+            <td align="right">
+                <b>for SHILP CREATION</b>
+                <br><br><br>
+                Authorised Signatory
+            </td>
+        </tr>
+    </table>
+    <div class="center">
+        <h4>SUBJECT TO NAVSARI,GUJARAT JURISDICTION</h4>
+        <p>This is a Computer Generated Invoice</p>
+    </div>
+</body>
+<button class="btn btn-info" id="download" >Download</button>
+</html>

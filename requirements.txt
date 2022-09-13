@@ -1,0 +1,5 @@
+Flask
+Flask_MySQLdb
+num2words
+gunicorn
+itsdangerous
