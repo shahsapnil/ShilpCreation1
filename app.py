@@ -4,6 +4,7 @@ from datetime import datetime , timedelta
 # from flask_mysqldb import MySQL
 
 
+
 app= Flask(__name__)
 # app.config['MYSQL_HOST'] = 'localhost'
 # app.config['MYSQL_USER'] = 'root'
@@ -50,8 +51,37 @@ def register():
         header=mainlist[:11]
         goods=mainlist[11:]
 
-        net_mtr=goods[1][1]-((100-header[-1][1])*goods[1][1])/100
-        total=net_mtr*goods[2][1]
+        finallist=[]
+        passlist=[]
+        for i in range(len(goods)):
+            if goods[i][1]!='':
+                finallist.append(goods[i][1])
+        # print(finallist)
+
+        i = 3
+        j=0
+        while (i <= len(finallist)):
+            passlist.append(finallist[j:i])
+            i+=3
+            j+=3
+        # print(passlist)
+        list2=[]
+        for i in passlist:
+            net_mtr=i[1]-((100-header[-1][1])*i[1])/100
+            total=net_mtr*i[2]
+            i.append(net_mtr)
+            i.append(total)
+            list2.append(i)
+        print(list2)
+
+        qty=0
+        total=0
+        for i in list2:
+            qty+=i[3]
+            total+=i[4]
+
+
+        # total=net_mtr*goods[2][1]
         igst=(total*5)/100
         final=total+igst 
         final_0_decimal=roundTraditional(final,0)
@@ -90,7 +120,7 @@ def register():
 
         
 
-        return render_template('taxinvoice.html',header=header,goods=goods,net_mtr=net_mtr,total=total,igst=igst,final=final,roff=roff,finaltotal=finaltotal,textfinal=textfinal ,date1=date1,parcel=parcel,pdfname=pdfname)
+        return render_template('taxinvoice.html',header=header,goods=goods,total=total,igst=igst,final=final,roff=roff,finaltotal=finaltotal,textfinal=textfinal ,date1=date1,parcel=parcel,pdfname=pdfname,list2=list2,qty=qty)
 
 
 if __name__=="__main__":
