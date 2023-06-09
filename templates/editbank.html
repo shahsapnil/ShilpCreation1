@@ -1,0 +1,61 @@
+{% extends 'index.html' %}
+
+{% block body %}
+<form action="https://shilpdev-1-q8760574.deta.app/bankentry" method="POST">
+    Payment Type : <select name="vtype">
+        {% if list1[0] == "Credit" %}
+        <option value="Credit" selected>Credit</option>
+        <option value="Debit">Debit</option>
+        {% else %}
+        <option value="Debit" selected>Debit</option>
+        <option value="Credit" >Credit</option>
+        {% endif %}
+    </select> <br>
+    Voucher No : <input type="text" name="vno" value="{{list1[1]}}" readonly> <br>
+    Date : <input type="date" name="entrydate" value="{{list1[2]}}"> <br>
+    Bank Acc : <select name="bank" >
+        {% if list1[3] == "HDFC A/C 83130" %}
+        <option value="HDFC A/C 83130" selected>HDFC A/C 83130</option>
+        <option value="BOB O.D A/C 0085">BOB O.D A/C 0085</option>
+        {% else %}
+        <option value="BOB O.D A/C 0085" selected>BOB O.D A/C 0085</option>
+        <option value="HDFC A/C 83130" >HDFC A/C 83130</option>
+        {% endif %}
+    </select> <br>
+    party name : <select name="pname">
+        <!-- onmouseover="if (this.value=='Miscellaneous'){userselect.style.display='inline-block';userselect1.style.display='inline-block'}else {userselect.style.display='none';userselect1.style.display='none'}; -->
+        <!-- {% for i in list1 %}
+        <option value="{{i}}">{{i}}</option>
+        {%endfor%}
+        <option value="Miscellaneous">Miscellaneous</option> -->
+
+        {% if list1[4] =="Miscellaneous" %}
+        <option value="Miscellaneous" selected>Miscellaneous</option>
+        {% for i in list2 %}
+        <option value="{{i}}">{{i}}</option>
+        {%endfor%}
+        {% else %}
+        {% for i in list2 %}
+      {% if i ==list1[4] %}
+      <option value="{{i}}" selected>{{i}}</option>
+      {% else %}
+      <option value="{{i}}">{{i}}</option>
+      {% endif %}
+      {%endfor%}
+      <option value="Miscellaneous">Miscellaneous</option>
+      {% endif %}
+    </select> <br>
+    <!-- <label id="input1" style="display:none;">Miscellaneous type : </label> -->
+    Remarks : <input type="text" value="{{list1[5]}}" name="Miscellaneous" id="input"/>
+    <div> Amount : <input type="text" name="amt" value="{{list1[6]}}"> <br></div>
+
+
+
+    <script>
+        var userselect = document.getElementById('input');
+        var userselect1 = document.getElementById('input1');
+    </script>
+    <input type="submit" value="Submit">
+
+</form>
+{% endblock %}

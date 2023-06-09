@@ -1,0 +1,32 @@
+{% extends 'index.html' %}
+
+{% block body %}
+<table border="1">
+    <tr>
+        <td>Date</td>
+        <td>Perticular</td>
+        <td>Voucher No</td>
+        <td>Debit</td>
+        <td>Credit</td>
+    </tr>
+    {% for i in list1 %}
+    <tr>
+        <td>{{ i[0] }}</td>
+        <td>{{ i[1] }}</td>
+        <td>{{ i[2] }}</td>
+        <td>{{ i[3] }}</td>
+        <td>{{ i[4] }}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+</form>
+{{debit}}
+{{credit}}
+{% endblock %}

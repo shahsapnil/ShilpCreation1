@@ -1,0 +1,12 @@
+{% extends 'index.html' %}
+
+{% block body %}
+    <form method="POST" action="">
+        Customer Name : <select name="sparty">
+            {% for i in list1 %}
+            <option value="{{i}}">{{i}}</option>
+            {%endfor%}
+          </select> <br>
+        <input type="submit" value="submit">
+    </form>
+    {% endblock %}

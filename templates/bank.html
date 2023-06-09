@@ -1,0 +1,35 @@
+{% extends 'index.html' %}
+
+{% block body %}
+<form action="https://shilpdev-1-q8760574.deta.app/bankentry" method="POST">
+    Payment Type : <select name="vtype">
+        <option value="Credit">Credit</option>
+        <option value="Debit">Debit</option>
+    </select> <br>
+    Voucher No : <input type="text" name="vno" value="{{vno}}" readonly> <br>
+    Date : <input type="date" name="entrydate"> <br>
+    Bank Acc : <select name="bank" >
+        <option value="HDFC A/C 83130">HDFC A/C 83130</option>
+        <option value="BOB O.D A/C 0085">BOB O.D A/C 0085</option>
+    </select> <br>
+    party name : <select name="pname">
+        <!-- onchange="if (this.value=='Miscellaneous'){userselect.style.display='inline-block';userselect1.style.display='inline-block'}else {userselect.style.display='none';userselect1.style.display='none'}; -->
+        {% for i in list1 %}
+        <option value="{{i}}">{{i}}</option>
+        {%endfor%}
+        <option value="Miscellaneous">Miscellaneous</option>
+    </select> <br>
+    <!-- <label id="input1" style="display:none;">Miscellaneous type : </label> -->
+    Remarks : <input type="text" name="Miscellaneous" id="input"/>
+    <div> Amount : <input type="text" name="amt"> <br></div>
+
+
+
+    <script>
+        var userselect = document.getElementById('input');
+        var userselect1 = document.getElementById('input1');
+    </script>
+    <input type="submit" value="Submit">
+
+</form>
+{% endblock %}

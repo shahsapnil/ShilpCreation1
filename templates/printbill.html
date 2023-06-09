@@ -1,0 +1,15 @@
+{% extends 'index.html' %}
+
+{% block body %}
+    <form method="POST" action="">
+        Bill No : <input type="text" name="bno"><br>
+        <!-- <input type="submit" value="Print Bill"> -->
+        <button type="submit" >Print</button>
+        <button type="submit" formaction="/changebill">Change</button>
+    </form>
+    <!-- <a href='/changebill' data-href1 ='https://cwvuk9.deta.dev/changebill'>
+        <button>
+            Change Bill
+        </button>
+    </a> -->
+    {% endblock %}

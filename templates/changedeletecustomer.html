@@ -1,0 +1,14 @@
+{% extends 'index.html' %}
+
+{% block body %}
+    <form method="POST" action="">
+        Sell Party Name : <input type="text" name="sparty" value="{{list3[0]}}"><br>
+        Bill To Address : <textarea name="baddress" rows="4" cols="50" id="baddress">{{list3[1]}}</textarea><br>
+        Bill to same as Ship To : <input type="checkbox" id="checkBox"
+        onclick="autoFilAddress()"><br>
+        Ship To Address : <textarea name="saddress" rows="4" cols="50" id="saddress">{{list3[2]}}</textarea><br>
+        GST Number : <input type="text" name="gnumber" value="{{list3[3]}}" required><br>
+        <input type="submit" formaction="/addcustomer" value="Change">
+        <button type="submit" formaction="/deletecustomer">Delete</button>
+    </form>
+    {% endblock %}

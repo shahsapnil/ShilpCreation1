@@ -1,0 +1,13 @@
+{% extends 'index.html' %}
+
+{% block body %}
+<form action="https://shilpdev-1-q8760574.deta.app/ledger" method="POST">
+    party name : <select name="sparty">
+        {% for i in list1 %}
+        <option value="{{i}}">{{i}}</option>
+        {%endfor%}
+      </select> <br>
+    <input type="submit" value="Submit">
+
+</form>
+{% endblock %}

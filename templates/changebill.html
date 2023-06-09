@@ -1,0 +1,63 @@
+{% extends 'index.html' %}
+
+{% block body %}
+  <!-- <form method="POST" action="http://127.0.0.1:5000/register"> -->
+  <form method="POST" action="https://shilpdev-1-q8760574.deta.app/register">
+    Voucher Type : <input type="text" name="vtype" value="{{list1[0][0][1]}}" readonly><br>
+    Invoice Number : <input type="text" name="inumber" value="{{list1[0][1][1]}}" required readonly><br>
+    Date : <input type="date" name="date" value="{{list1[0][2][1]}}" required><br>
+    Sell Party : <select name="sparty">
+      {% for i in list2 %}
+      {% if i ==list1[0][3][1] %}
+      <option value="{{i}}" selected>{{i}}</option>
+      {% else %}
+      <option value="{{i}}">{{i}}</option>
+      {% endif %}
+      {%endfor%}
+    </select> <br>
+    Fold length : <input type="text" name="fold" value="{{list1[0][4][1]}}"><br>
+    <table name="desc">
+      <tr>
+        <th>SI No</th>
+        <th>Description of Goods</th>
+        <th>Quantity</th>
+        <th>Sell Rate</th>
+      </tr>
+      <tr>
+        <th>1</th>
+        <th><input type="text" name="goods1" value="{{list1[0][5][1]}}"></th>
+        <th><input type="text" name="qty1" value="{{list1[0][6][1]}}"></th>
+        <th><input type="text" name="srate1" value="{{list1[0][7][1]}}"></th>
+      </tr>
+      <tr>
+        <th>2</th>
+        <th><input type="text" name="goods2" value="{{list1[0][8][1]}}"></th>
+        <th><input type="text" name="qty2" value="{{list1[0][9][1]}}"></th>
+        <th><input type="text" name="srate2" value="{{list1[0][10][1]}}"></th>
+      </tr>
+      <tr>
+        <th>3</th>
+        <th><input type="text" name="goods3" value="{{list1[0][11][1]}}"></th>
+        <th><input type="text" name="qty3" value="{{list1[0][12][1]}}"></th>
+        <th><input type="text" name="srate3" value="{{list1[0][13][1]}}"></th>
+      </tr>
+      <tr>
+        <th>4</th>
+        <th><input type="text" name="goods4" value="{{list1[0][14][1]}}"></th>
+        <th><input type="text" name="qty4" value="{{list1[0][15][1]}}"></th>
+        <th><input type="text" name="srate4" value="{{list1[0][16][1]}}"></th>
+      </tr>
+      <tr>
+        <th>5</th>
+        <th><input type="text" name="goods5" value="{{list1[0][17][1]}}"></th>
+        <th><input type="text" name="qty5" value="{{list1[0][18][1]}}"></th>
+        <th><input type="text" name="srate5" value="{{list1[0][19][1]}}"></th>
+      </tr>
+    </table>
+    Discount Amt : <input type="text" name="discount" value="{{list1[0][-2][1]}}"> <br>
+    Teansport name :<input type="text" name="parcel" required value="{{list1[0][-1][1]}}"> <br>
+    <input type="submit" value="submit">
+  </form>
+  
+
+  {% endblock %}

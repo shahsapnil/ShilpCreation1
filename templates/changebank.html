@@ -1,0 +1,32 @@
+{% extends 'index.html' %}
+
+{% block body %}
+<table>
+<tr>
+    <th>SR No</th>
+    <th>Date</th>
+    <th>Particular</th>
+    <th>Party Name</th>
+    <th>Debit</th>
+    <th>Credit</th>
+    <th></th>
+    <th></th>
+</tr>
+{% set count = namespace(value=0) %}
+{% for i in list1 %}
+<tr>
+<td>{{list1[count.value][0]}}</td>
+<td>{{list1[count.value][1]}}</td>
+<td>{{list1[count.value][2]}}</td>
+<td>{{list1[count.value][3]}}</td>
+<td>{{list1[count.value][4]}}</td>
+<td>{{list1[count.value][5]}}</td>
+<td><a href="/editbank/{{list1[count.value][0]}}">Edit</a></td>
+<td><a href="/deletebank/{{list1[count.value][0]}}">Delete</a></td>
+</tr>
+{% set count.value = count.value + 1 %}
+{%endfor%}
+</table>
+
+</form>
+{% endblock %}

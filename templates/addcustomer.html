@@ -1,0 +1,12 @@
+{% extends 'index.html' %}
+
+{% block body %}
+    <form method="POST" action="">
+        Sell Party Name : <input type="text" name="sparty"><br>
+        Bill To Address : <textarea name="baddress" rows="4" cols="50" id="baddress"></textarea><br>
+        Bill to same as Ship To : <input type="checkbox" id="checkBox" onclick="autoFilAddress()"><br>
+        Ship To Address : <textarea name="saddress" rows="4" cols="50" id="saddress"></textarea><br>
+        GST Number : <input type="text" name="gnumber" required><br>
+        <input type="submit" value="submit">
+    </form>
+    {% endblock %}
